@@ -25,6 +25,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import timber.log.Timber;
+
 public class HomeActivity extends AppCompatActivity {
 
     private static final String TAG = "TAG";
@@ -54,7 +56,7 @@ public class HomeActivity extends AppCompatActivity {
         bottomFrag.setOnNavigationItemSelectedListener(bfragListner);
         getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new HomeFragment()).commit();
 
-        updateSharedPreference();
+        if (auth.getCurrentUser() != null) updateSharedPreference();
 
     }
 
@@ -74,7 +76,7 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.d(TAG, "onCancelled: "+error.getMessage());
+                Timber.d("onCancelled: " + error.getMessage());
             }
         });
     }
@@ -103,4 +105,8 @@ public class HomeActivity extends AppCompatActivity {
 
                 return true;
             };
+
+    public void goToMaps() {
+        startActivity(new Intent(HomeActivity.this, MapActivity.class));
+    }
 }
