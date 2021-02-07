@@ -10,6 +10,19 @@ public class SharedPreference {
     private static final String USER_DETAILS = "userDetails";
     private static final String USER_NAME = "userName";
     private static final String USER_EMAIL = "userEmail";
+    private static final String USER_ID = "userId";
+
+    public static String getUserId(Context context) {
+        SharedPreferences SPUserDetails= context.getSharedPreferences(USER_DETAILS,MODE_PRIVATE);
+        return SPUserDetails.getString(USER_ID,"");
+    }
+
+    public static void setUserId(Context context,String value) {
+        SharedPreferences SPUserDetails = context.getSharedPreferences(USER_DETAILS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = SPUserDetails.edit();
+        editor.putString(USER_ID , value);
+        editor.apply();
+    }
 
     public static String getUserEmail(Context context) {
         SharedPreferences SPUserDetails= context.getSharedPreferences(USER_DETAILS,MODE_PRIVATE);
