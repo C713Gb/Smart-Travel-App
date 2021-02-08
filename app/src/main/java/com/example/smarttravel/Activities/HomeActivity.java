@@ -1,4 +1,4 @@
-package com.example.smarttravel;
+package com.example.smarttravel.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
+import com.example.smarttravel.R;
 import com.example.smarttravel.fragments.AccountFragment;
 import com.example.smarttravel.fragments.ExploreFragment;
 import com.example.smarttravel.fragments.HomeFragment;
