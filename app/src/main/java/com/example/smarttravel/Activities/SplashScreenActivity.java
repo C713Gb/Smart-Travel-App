@@ -17,12 +17,12 @@ public class SplashScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
-        new Handler().postDelayed(() -> {
-            Intent intent = new Intent(SplashScreenActivity.this, HomeActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-            finish();
-        }, WELCOME_TIMEOUT);
+        //new Handler().postDelayed(() -> {
+           // Intent intent = new Intent(SplashScreenActivity.this, HomeActivity.class);
+            //startActivity(intent);
+            //overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+            //finish();
+        //}, WELCOME_TIMEOUT);
 
     }
 }
