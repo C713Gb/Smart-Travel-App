@@ -1,27 +1,45 @@
 package com.example.smarttravel.Fragments;
 
+import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.core.widget.ImageViewCompat;
+import androidx.fragment.app.Fragment;
 
 import com.example.smarttravel.Activities.MapActivity;
+import com.example.smarttravel.Models.Destination;
+import com.example.smarttravel.Models.Route;
 import com.example.smarttravel.R;
+import com.example.smarttravel.SharedPreference.SharedPreference;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Calendar;
+
+import timber.log.Timber;
 
 public class SetRouteFragment extends Fragment {
 
     MapActivity ma;
-    TextView destination, startlocation, next;
+    TextView destination, startlocation, next, date;
     ImageView car, bike, walk;
     LinearLayout carLayout, bikeLayout, walkLayout;
+    String selectedMode = "";
+    ProgressDialog progressDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,6 +56,10 @@ public class SetRouteFragment extends Fragment {
         carLayout = root.findViewById(R.id.car_layout);
         bikeLayout = root.findViewById(R.id.bike_layout);
         walkLayout = root.findViewById(R.id.walk_layout);
+        date = root.findViewById(R.id.date_txt);
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.setCancelable(false);
         return root;
     }
 
@@ -45,7 +67,122 @@ public class SetRouteFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         destination.setOnClickListener(view1 -> ma.searchLocation());
+        new Handler().postDelayed(() -> ma.bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED), 1000);
 
+        car.setOnClickListener(view1 -> updateCar());
+
+        bike.setOnClickListener(view1 -> updateBike());
+
+        walk.setOnClickListener(view1 -> updateWalk());
+
+        carLayout.setOnClickListener(view1 -> updateCar());
+
+        bikeLayout.setOnClickListener(view1 -> updateBike());
+
+        walkLayout.setOnClickListener(view1 -> updateWalk());
+
+        date.setOnClickListener(view1 -> new DatePickerDialog(getContext(), ma.myDateListener, ma.calendar
+                .get(Calendar.YEAR), ma.calendar.get(Calendar.MONTH),
+                ma.calendar.get(Calendar.DAY_OF_MONTH)).show());
+
+        next.setOnClickListener(view1 -> {
+            if ((destination.getText().toString().length() > 0) &&
+                    (!destination.getText().toString().equals("Select destination"))){
+                if (selectedMode.length() > 0){
+                    if (!date.getText().toString().equals("Set Travel Date")){
+                        updateDatabase();
+                    } else {
+                        Toast.makeText(ma, "Please select date", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(ma, "Please select mode", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(ma, "Please select destination", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
+
+    private void updateDatabase() {
+        progressDialog.setMessage("Uploading...");
+        progressDialog.show();
+
+        try {
+
+            Destination destinationObject = new Destination(Double.toString(ma.destination.latitude()),
+                    Double.toString(ma.destination.longitude()));
+
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("rides");
+            String id = reference.push().getKey();
+
+            Route route = new Route(
+                    destination.getText().toString(),
+                    SharedPreference.getUserId(getContext()),
+                    selectedMode,
+                    date.getText().toString(),
+                    destinationObject,
+                    id
+            );
+
+            assert id != null;
+            reference.child(id).setValue(route).addOnCompleteListener(task -> {
+                if (task.isSuccessful()){
+                    progressDialog.dismiss();
+                    Toast.makeText(ma, "Ride successfully created!", Toast.LENGTH_SHORT).show();
+                    ma.goToHome();
+                } else {
+                    progressDialog.dismiss();
+                    Timber.d("updateDatabase: %s", task.getException().getMessage());
+                    task.getException().printStackTrace();
+                }
+            });
+
+        } catch (Exception e){
+            progressDialog.dismiss();
+            e.printStackTrace();
+        }
+
+    }
+
+    private void updateWalk() {
+        selectedMode = "walk";
+        carLayout.setBackgroundResource(R.drawable.textview_background);
+        bikeLayout.setBackgroundResource(R.drawable.textview_background);
+        walkLayout.setBackgroundResource(R.drawable.black_background);
+        ImageViewCompat.setImageTintList(car,
+                ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.black)));
+        ImageViewCompat.setImageTintList(bike,
+                ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.black)));
+        ImageViewCompat.setImageTintList(walk,
+                ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.white)));
+    }
+
+    private void updateBike() {
+        selectedMode = "bike";
+        carLayout.setBackgroundResource(R.drawable.textview_background);
+        bikeLayout.setBackgroundResource(R.drawable.black_background);
+        walkLayout.setBackgroundResource(R.drawable.textview_background);
+        ImageViewCompat.setImageTintList(car,
+                ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.black)));
+        ImageViewCompat.setImageTintList(bike,
+                ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.white)));
+        ImageViewCompat.setImageTintList(walk,
+                ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.black)));
+    }
+
+    private void updateCar() {
+        selectedMode = "car";
+        carLayout.setBackgroundResource(R.drawable.black_background);
+        bikeLayout.setBackgroundResource(R.drawable.textview_background);
+        walkLayout.setBackgroundResource(R.drawable.textview_background);
+        ImageViewCompat.setImageTintList(car,
+                ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.white)));
+        ImageViewCompat.setImageTintList(bike,
+                ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.black)));
+        ImageViewCompat.setImageTintList(walk,
+                ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.black)));
     }
 
     @Override
@@ -55,5 +192,9 @@ public class SetRouteFragment extends Fragment {
             if (ma.placeName.length() > 0)
                 destination.setText(ma.placeName);
         }
+    }
+
+    public void updateDate(StringBuilder s){
+        date.setText(s);
     }
 }

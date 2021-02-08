@@ -3,6 +3,7 @@ package com.example.smarttravel.Activities;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -11,8 +12,8 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -23,14 +24,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import static com.mapbox.core.constants.Constants.PRECISION_6;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineCap;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineColor;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineJoin;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineWidth;
-
 import com.example.smarttravel.Fragments.SetRouteFragment;
 import com.example.smarttravel.R;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.mapbox.android.core.location.LocationEngine;
 import com.mapbox.android.core.location.LocationEngineCallback;
 import com.mapbox.android.core.location.LocationEngineProvider;
@@ -44,10 +40,6 @@ import com.mapbox.api.directions.v5.MapboxDirections;
 import com.mapbox.api.directions.v5.models.DirectionsResponse;
 import com.mapbox.api.directions.v5.models.DirectionsRoute;
 import com.mapbox.api.geocoding.v5.models.CarmenFeature;
-import com.mapbox.api.optimization.v1.MapboxOptimization;
-import com.mapbox.api.optimization.v1.models.OptimizationResponse;
-import com.mapbox.geojson.Feature;
-import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.geojson.LineString;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -73,6 +65,7 @@ import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.ref.WeakReference;
+import java.util.Calendar;
 import java.util.List;
 
 import retrofit2.Call;
@@ -80,11 +73,16 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import timber.log.Timber;
 
+import static com.mapbox.core.constants.Constants.PRECISION_6;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineCap;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineColor;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineJoin;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineWidth;
+
 public class MapActivity extends AppCompatActivity implements LocationListener, OnMapReadyCallback, PermissionsListener,
         MapboxMap.OnFlingListener, MapboxMap.OnMoveListener, MapboxMap.OnCameraMoveListener {
 
     private static final int REQUEST_CODE_AUTOCOMPLETE = 1;
-    private static final String TAG = "TAG";
     @SuppressLint("StaticFieldLeak")
     private static MapView mapView;
     public MapboxMap mapboxMap;
@@ -94,9 +92,12 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
     public static Boolean isvis = false;
     public Location location;
     public String placeName = "", lat = "", lng = "";
-    Point origin = null, destination = null;
+    public Point origin = null, destination = null;
     ProgressDialog progressDialog;
     DirectionsRoute currentRoute;
+    public BottomSheetBehavior bottomSheetBehavior;
+    public StringBuilder str_date;
+    public Calendar calendar;
 
     private final LocationChangeListeningActivityLocationCallback callback =
             new LocationChangeListeningActivityLocationCallback(this);
@@ -113,6 +114,11 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
 
         ImageView back = findViewById(R.id.back_btn);
         back.setOnClickListener(view -> onBackPressed());
+
+        View bottomSheet = findViewById(R.id.bottom_sheet);
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
+
+        calendar = Calendar.getInstance();
 
         ImageButton zoom = findViewById(R.id.zoom_btn);
         zoom.setOnClickListener(view -> {
@@ -252,7 +258,7 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
             } catch (Exception ignored) {
 
             }
-        }, 2000);
+        }, 750);
 
 
     }
@@ -357,7 +363,7 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
 
     public void searchLocation() {
 
-        Point myPoint = null;
+        Point myPoint;
         if (mapboxMap.getLocationComponent().getLastKnownLocation() != null) {
             com.mapbox.mapboxsdk.geometry.LatLng abc = new com.mapbox.mapboxsdk.geometry.LatLng();
             abc.setLatitude(mapboxMap.getLocationComponent().getLastKnownLocation().getLatitude());
@@ -451,7 +457,7 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
                                         .include(new LatLng(origin.latitude(), origin.longitude()))
                                         .include(new LatLng(destination.latitude(), destination.longitude()))
                                         .build();
-                                int[] padding = {40,0,40,600};
+                                int[] padding = {40,10,40,1000};
                                 CameraPosition cameraPosition = mapboxMap.getCameraForLatLngBounds
                                         (latLngBounds,padding);
                                 mapboxMap.easeCamera(CameraUpdateFactory
@@ -524,12 +530,12 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
 
     @Override
     public void onFling() {
-
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
 
     @Override
     public void onMoveBegin(@NonNull MoveGestureDetector detector) {
-
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
 
     @Override
@@ -545,6 +551,13 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
     @Override
     public void onCameraMove() {
 
+    }
+
+    public void goToHome() {
+        Intent intent = new Intent(MapActivity.this, HomeActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
     }
 
     private static class LocationChangeListeningActivityLocationCallback
@@ -615,5 +628,28 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
                         Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    public DatePickerDialog.OnDateSetListener myDateListener = new
+            DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker arg0,
+                                      int arg1, int arg2, int arg3) {
+                    calendar.set(Calendar.YEAR, arg3);
+                    calendar.set(Calendar.MONTH, arg2+1);
+                    calendar.set(Calendar.DAY_OF_MONTH, arg1);
+                    showDate(arg1, arg2+1, arg3);
+                }
+            };
+
+    public void showDate(int year, int month, int day) {
+        str_date = new StringBuilder().append(day).append("-")
+                .append(month).append("-").append(year);
+
+        SetRouteFragment fragment = (SetRouteFragment)getSupportFragmentManager()
+                .findFragmentById(R.id.fragment_container_bottom);
+
+        assert fragment != null;
+        fragment.updateDate(str_date);
     }
 }

@@ -3,14 +3,12 @@ package com.example.smarttravel.Activities;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.smarttravel.Fragments.AccountFragment;
-import com.example.smarttravel.Fragments.ExploreFragment;
 import com.example.smarttravel.Fragments.HomeFragment;
 import com.example.smarttravel.Fragments.MusicFragment;
 import com.example.smarttravel.Models.User;
@@ -29,7 +27,6 @@ import timber.log.Timber;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private static final String TAG = "TAG";
     BottomNavigationView bottomFrag;
     DatabaseReference reference;
     FirebaseAuth auth;
@@ -68,6 +65,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user = snapshot.getValue(User.class);
+                assert user != null;
                 SharedPreference.setUserEmail(HomeActivity.this, user.getUserEmail());
                 SharedPreference.setUserId(HomeActivity.this, user.getUserId());
                 SharedPreference.setUserName(HomeActivity.this, user.getUsername());
@@ -76,7 +74,7 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Timber.d("onCancelled: " + error.getMessage());
+                Timber.d("onCancelled: %s", error.getMessage());
             }
         });
     }
@@ -89,9 +87,6 @@ public class HomeActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.bf_home:
                         selectedFragment = new HomeFragment();
-                        break;
-                    case R.id.bf_explore:
-                        selectedFragment = new ExploreFragment();
                         break;
                     case R.id.bf_music:
                         selectedFragment = new MusicFragment();
