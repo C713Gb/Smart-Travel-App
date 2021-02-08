@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bottom_sheet_page"
+    android:orientation="vertical"
+    tools:context=".Fragments.SetRouteFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/mapbox_marker_icon_default" />
+
+        <TextView
+            android:id="@+id/destination_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/textview_background"
+            android:elevation="6dp"
+            android:fontFamily="@font/opensans_regular"
+            android:gravity="center"
+            android:padding="15dp"
+            android:text="@string/select_destination"
+            android:textColor="@color/black" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:src="@drawable/ic__three_dots" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/ic_rec" />
+
+        <TextView
+            android:id="@+id/location_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/textview_background"
+            android:elevation="6dp"
+            android:fontFamily="@font/opensans_regular"
+            android:gravity="center"
+            android:padding="15dp"
+            android:text="@string/your_location"
+            android:textColor="@color/black" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/opensans_regular"
+        android:paddingStart="15dp"
+        android:paddingTop="15dp"
+        android:text="Select mode of transport"
+        android:textColor="@color/black" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:id="@+id/car_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/textview_background"
+            android:clickable="true"
+            android:elevation="6dp"
+            android:gravity="center"
+            android:padding="20dp">
+
+            <ImageView
+                android:id="@+id/car_img"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:clickable="true"
+                android:src="@drawable/ic_car" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/bike_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/textview_background"
+            android:elevation="6dp"
+            android:gravity="center"
+            android:padding="20dp">
+
+            <ImageView
+                android:id="@+id/bike_img"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_motorbike" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/walk_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/textview_background"
+            android:elevation="6dp"
+            android:gravity="center"
+            android:padding="20dp">
+
+            <ImageView
+                android:id="@+id/walk_img"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_walk" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/date_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/textview_background"
+        android:clickable="true"
+        android:elevation="6dp"
+        android:fontFamily="@font/opensans_regular"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="Set Travel Date"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/next_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/text_background"
+        android:elevation="6dp"
+        android:fontFamily="@font/opensans_regular"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="Confirm"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+
+</LinearLayout>
