@@ -25,8 +25,11 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.smarttravel.Fragments.SetRouteFragment;
+import com.example.smarttravel.Models.Destination;
+import com.example.smarttravel.Models.Route;
 import com.example.smarttravel.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.gson.Gson;
 import com.mapbox.android.core.location.LocationEngine;
 import com.mapbox.android.core.location.LocationEngineCallback;
 import com.mapbox.android.core.location.LocationEngineProvider;
@@ -98,6 +101,8 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
     public BottomSheetBehavior bottomSheetBehavior;
     public StringBuilder str_date;
     public Calendar calendar;
+    public String strUpdate = "false";
+    public Route route;
 
     private final LocationChangeListeningActivityLocationCallback callback =
             new LocationChangeListeningActivityLocationCallback(this);
@@ -111,6 +116,13 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
         mapView = findViewById(R.id.map_view);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
+
+        if (getIntent().getExtras() != null){
+            strUpdate = "true";
+
+            String data = getIntent().getStringExtra("Route");
+            route = new Gson().fromJson(data, Route.class);
+        }
 
         ImageView back = findViewById(R.id.back_btn);
         back.setOnClickListener(view -> onBackPressed());
@@ -258,7 +270,7 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
             } catch (Exception ignored) {
 
             }
-        }, 750);
+        }, 350);
 
 
     }
@@ -410,6 +422,31 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
             abc.setLatitude(mapboxMap.getLocationComponent().getLastKnownLocation().getLatitude());
             abc.setLongitude(mapboxMap.getLocationComponent().getLastKnownLocation().getLongitude());
             origin = Point.fromLngLat(abc.getLongitude(), abc.getLatitude());
+
+            routeSource();
+        }
+    }
+
+    public void showDirection2(Destination destinationObject){
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.setMessage("Loading Route...");
+        progressDialog.show();
+
+        if (mapboxMap.getLocationComponent().getLastKnownLocation() != null) {
+            com.mapbox.mapboxsdk.geometry.LatLng abc = new com.mapbox.mapboxsdk.geometry.LatLng();
+            abc.setLatitude(mapboxMap.getLocationComponent().getLastKnownLocation().getLatitude());
+            abc.setLongitude(mapboxMap.getLocationComponent().getLastKnownLocation().getLongitude());
+            origin = Point.fromLngLat(abc.getLongitude(), abc.getLatitude());
+            double dLat = Double.parseDouble(destinationObject.getLatitude());
+            double dLng = Double.parseDouble(destinationObject.getLongitude());
+
+            destination = Point.fromLngLat(dLng, dLat);
+
+            mapboxMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(dLat, dLng))
+                    .title(placeName));
 
             routeSource();
         }

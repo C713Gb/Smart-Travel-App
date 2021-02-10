@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.smarttravel.Activities.HomeActivity;
 import com.example.smarttravel.Models.Route;
 import com.example.smarttravel.R;
 
@@ -18,6 +19,7 @@ public class RidesAdapter extends RecyclerView.Adapter<RidesAdapter.ViewHolder> 
 
     Context mContext;
     List<Route> routeList;
+    HomeActivity homeActivity;
 
     public RidesAdapter(Context mContext, List<Route> routeList) {
         this.mContext = mContext;
@@ -34,8 +36,11 @@ public class RidesAdapter extends RecyclerView.Adapter<RidesAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull RidesAdapter.ViewHolder holder, int position) {
 
+        homeActivity = (HomeActivity) mContext;
         holder.place.setText(routeList.get(position).getDestination());
         holder.date.setText(routeList.get(position).getDate());
+
+        holder.place.setOnClickListener(view -> homeActivity.updateMap(routeList.get(position)));
 
     }
 

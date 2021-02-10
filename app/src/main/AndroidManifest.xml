@@ -13,11 +13,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartTravel">
-        <activity android:name=".Activities.MapActivity"></activity>
-        <activity android:name=".Activities.UserDetailsActivity" />
-        <activity android:name=".Activities.WelcomeActivity" />
-        <activity android:name=".Activities.HomeActivity" />
-        <activity android:name=".Activities.SplashScreenActivity">
+        <activity android:name=".Activities.MapActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.UserDetailsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.WelcomeActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.HomeActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.SplashScreenActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
