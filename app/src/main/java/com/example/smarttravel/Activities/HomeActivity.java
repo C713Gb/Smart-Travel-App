@@ -2,7 +2,12 @@ package com.example.smarttravel.Activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -77,6 +82,7 @@ public class HomeActivity extends AppCompatActivity {
                 Timber.d("onCancelled: %s", error.getMessage());
             }
         });
+
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -104,4 +110,8 @@ public class HomeActivity extends AppCompatActivity {
     public void goToMaps() {
         startActivity(new Intent(HomeActivity.this, MapActivity.class));
     }
+
+
+
+
 }
