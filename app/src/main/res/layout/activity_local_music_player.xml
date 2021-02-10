@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="10"
+    android:orientation="vertical"
+    android:padding="@dimen/box_inset_layout_padding"
+    tools:context=".Activities.LocalMusicPlayerActivity"
+    tools:deviceIds="wear">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="39dp"
+        android:layout_weight="7"
+        android:background="#000"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:src="@drawable/cover3" />
+
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Song Name"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:layout_weight="0.2"
+        android:id="@+id/songName"
+
+        android:singleLine="true"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:ellipsize="marquee"
+        android:background="#000"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2.8"
+        android:background="#000">
+        <SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="40dp"
+            android:outlineAmbientShadowColor="@color/white"
+            android:outlineSpotShadowColor="@color/white"
+            android:outlineProvider="none"
+            android:id="@+id/musicSeekBar"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_pause"
+            android:id="@+id/pauseButton"
+            android:layout_above="@id/musicSeekBar"
+            android:layout_marginBottom="30dp"
+            android:layout_centerInParent="true"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_previous"
+            android:layout_centerInParent="true"
+            android:layout_toLeftOf="@id/pauseButton"
+            android:id="@+id/previousButton"
+            android:layout_above="@id/musicSeekBar"
+            android:layout_marginBottom="30dp"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_next"
+            android:layout_centerInParent="true"
+            android:layout_toRightOf="@id/pauseButton"
+            android:layout_above="@id/musicSeekBar"
+            android:layout_marginBottom="30dp"
+            android:id="@+id/nextButton"/>
+
+
+
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>
