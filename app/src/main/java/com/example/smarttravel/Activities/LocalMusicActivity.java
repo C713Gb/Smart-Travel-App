@@ -33,7 +33,6 @@ public class LocalMusicActivity extends AppCompatActivity {
     ArrayList<String> arrayList;
     ArrayAdapter<String> arrayAdapter;
     ListView songListView;
-    MediaPlayer mediaPlayer;
     List<File> files;
 
 
@@ -72,7 +71,6 @@ public class LocalMusicActivity extends AppCompatActivity {
     public void doStuff(){
         songListView = (ListView) findViewById(R.id.songlistView);
         arrayList = new ArrayList<>();
-       // mediaPlayer = MediaPlayer.create(getApplicationContext(),getMusic());
 
         getMusic(); // initialize Uri here
 
