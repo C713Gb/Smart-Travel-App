@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 public class LocalMusicPlayerActivity extends AppCompatActivity {
 
-    Button pause,next,previous;
+   /* Button pause,next,previous;
     SeekBar seekbar;
     TextView songText;
     String sName;
@@ -106,5 +106,5 @@ public class LocalMusicPlayerActivity extends AppCompatActivity {
         });
 
 
-    }
+    }*/
 }
