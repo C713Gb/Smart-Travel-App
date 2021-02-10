@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment;
 import com.example.smarttravel.Fragments.AccountFragment;
 import com.example.smarttravel.Fragments.HomeFragment;
 import com.example.smarttravel.Fragments.MusicFragment;
-import com.example.smarttravel.Models.Route;
 import com.example.smarttravel.Models.User;
 import com.example.smarttravel.R;
 import com.example.smarttravel.SharedPreference.SharedPreference;
@@ -23,10 +22,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
 
 import timber.log.Timber;
 
