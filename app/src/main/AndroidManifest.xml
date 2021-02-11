@@ -22,6 +22,8 @@
         android:theme="@style/Theme.SmartTravel"
         android:requestLegacyExternalStorage="true">
 
+        <activity android:name=".Activities.AccountNameChange"/>
+        <activity android:name=".Activities.AccountEmailChange"/>
         <activity android:name=".Activities.LocalMusicPlayerActivity" />
         <activity android:name=".Activities.LocalMusicActivity" />
         <activity android:name=".Activities.MapActivity" />

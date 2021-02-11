@@ -10,10 +10,10 @@
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/bottom_fragment_menu" >
+        android:layout_above="@id/bottom_fragment_song_menu" >
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_fragment_menu"
+            android:id="@+id/bottom_fragment_song_menu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

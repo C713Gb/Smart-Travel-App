@@ -4,14 +4,59 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/teal_700">
+    android:background="@color/white">
+
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:background="@mipmap/ic_launcher"
+        android:id="@+id/accountImage"/>
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Account"
+        android:layout_width="200dp"
+        android:layout_height="38dp"
+        android:layout_below="@id/accountImage"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="65dp"
         android:textColor="@color/white"
-        android:layout_centerInParent="true"
-        android:textSize="30dp"/>
+        android:hint="Enter Name"
+        android:editable="true"
+        android:textSize="20dp"
+        android:id="@+id/accountName" />
+
+
+    <Button
+        android:layout_width="42dp"
+        android:layout_height="38dp"
+        android:layout_below="@id/accountImage"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="65dp"
+        android:layout_toRightOf="@id/accountName"
+        android:background="@drawable/ic_edit"
+        android:id="@+id/editAccountName"/>
+
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="38dp"
+        android:layout_below="@id/accountName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:textColor="@color/white"
+        android:hint="Enter Email"
+        android:editable="true"
+        android:textSize="20dp"
+        android:id="@+id/accountEmail" />
+    <Button
+        android:layout_width="42dp"
+        android:layout_height="38dp"
+        android:layout_below="@id/accountName"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="25dp"
+        android:layout_toRightOf="@id/accountEmail"
+        android:background="@drawable/ic_edit"
+        android:id="@+id/editAccountEmail"/>
+
+
 </RelativeLayout>
