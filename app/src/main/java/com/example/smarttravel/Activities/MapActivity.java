@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,6 +30,8 @@ import com.example.smarttravel.Models.Destination;
 import com.example.smarttravel.Models.Route;
 import com.example.smarttravel.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import com.mapbox.android.core.location.LocationEngine;
 import com.mapbox.android.core.location.LocationEngineCallback;
@@ -103,6 +106,8 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
     public Calendar calendar;
     public String strUpdate = "false";
     public Route route;
+    ImageView delete;
+    TextView name;
 
     private final LocationChangeListeningActivityLocationCallback callback =
             new LocationChangeListeningActivityLocationCallback(this);
@@ -116,16 +121,23 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
         mapView = findViewById(R.id.map_view);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
+        delete = findViewById(R.id.delete_btn);
+        name = findViewById(R.id.location_name);
 
         if (getIntent().getExtras() != null){
             strUpdate = "true";
 
             String data = getIntent().getStringExtra("Route");
             route = new Gson().fromJson(data, Route.class);
+            delete.setVisibility(View.VISIBLE);
+            name.setText(route.getDestination());
+            name.setVisibility(View.VISIBLE);
         }
 
         ImageView back = findViewById(R.id.back_btn);
         back.setOnClickListener(view -> onBackPressed());
+
+        delete.setOnClickListener(view -> deleteRoute(route));
 
         View bottomSheet = findViewById(R.id.bottom_sheet);
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
@@ -153,6 +165,33 @@ public class MapActivity extends AppCompatActivity implements LocationListener, 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_bottom,
                 new SetRouteFragment()).commit();
 
+    }
+
+    private void deleteRoute(Route route) {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.setMessage("Deleting Route...");
+        progressDialog.show();
+
+        try {
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("rides");
+            reference.child(route.getRouteId()).setValue(null).addOnCompleteListener(task -> {
+                if (task.isSuccessful()){
+                    progressDialog.dismiss();
+                    Toast.makeText(this, "Route deleted successfully", Toast.LENGTH_SHORT).show();
+                    onBackPressed();
+                } else{
+                    progressDialog.dismiss();
+                    Toast.makeText(this, "Failed : "+task.getException().getMessage(),
+                            Toast.LENGTH_SHORT).show();
+                }
+            });
+        } catch (Exception e){
+            progressDialog.dismiss();
+            Toast.makeText(this, "Delete Failed", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
     }
 
     @Override

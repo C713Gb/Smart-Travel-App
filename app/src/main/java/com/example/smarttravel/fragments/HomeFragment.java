@@ -55,6 +55,13 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+        updateRides();
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         create.setOnClickListener(view1 -> homeActivity.goToMaps());
 
@@ -72,10 +79,12 @@ public class HomeFragment extends Fragment {
         past.setLayoutManager(linearLayoutManager);
         upcoming.setLayoutManager(linearLayoutManager2);
 
-        updateRides();
+
     }
 
-    private void updateRides() {
+    public void updateRides() {
+        upcomingRouteList.clear();
+        pastRouteList.clear();
 
         try {
             reference = FirebaseDatabase.getInstance().getReference("rides");
