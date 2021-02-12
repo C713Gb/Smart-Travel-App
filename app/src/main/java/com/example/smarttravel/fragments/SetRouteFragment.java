@@ -1,11 +1,11 @@
 package com.example.smarttravel.Fragments;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +30,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 import timber.log.Timber;
 
@@ -65,6 +66,7 @@ public class SetRouteFragment extends Fragment {
         return root;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
@@ -74,16 +76,22 @@ public class SetRouteFragment extends Fragment {
         if (ma.strUpdate.equals("true")){
             route = ma.route;
             String mode = route.getMode();
-            if (mode.equals("car")) updateCar();
-            else if (mode.equals("bike")) updateBike();
-            else if (mode.equals("walk")) updateWalk();
+            switch (mode) {
+                case "car":
+                    updateCar();
+                    break;
+                case "bike":
+                    updateBike();
+                    break;
+                case "walk":
+                    updateWalk();
+                    break;
+            }
 
             destination.setText(route.getDestination());
             date.setText(route.getDate());
             next.setText("Update");
-            new Handler().postDelayed(() -> {
-                ma.showDirection2(route.getDestinationLatLng());
-            }, 2000);
+            new Handler().postDelayed(() -> ma.showDirection2(route.getDestinationLatLng()), 2000);
 
         }
 
@@ -141,7 +149,7 @@ public class SetRouteFragment extends Fragment {
 
             Route route = new Route(
                     destination.getText().toString(),
-                    SharedPreference.getUserId(getContext()),
+                    SharedPreference.getUserId(Objects.requireNonNull(getContext())),
                     selectedMode,
                     date.getText().toString(),
                     destinationObject,
@@ -156,7 +164,7 @@ public class SetRouteFragment extends Fragment {
                     ma.goToHome();
                 } else {
                     progressDialog.dismiss();
-                    Timber.d("updateRoute: %s", task.getException().getMessage());
+                    Timber.d("updateRoute: %s", Objects.requireNonNull(task.getException()).getMessage());
                     task.getException().printStackTrace();
                 }
             });
@@ -182,7 +190,7 @@ public class SetRouteFragment extends Fragment {
 
             Route route = new Route(
                     destination.getText().toString(),
-                    SharedPreference.getUserId(getContext()),
+                    SharedPreference.getUserId(Objects.requireNonNull(getContext())),
                     selectedMode,
                     date.getText().toString(),
                     destinationObject,
@@ -197,7 +205,7 @@ public class SetRouteFragment extends Fragment {
                     ma.goToHome();
                 } else {
                     progressDialog.dismiss();
-                    Timber.d("updateDatabase: %s", task.getException().getMessage());
+                    Timber.d("updateDatabase: %s", Objects.requireNonNull(task.getException()).getMessage());
                     task.getException().printStackTrace();
                 }
             });
@@ -215,7 +223,7 @@ public class SetRouteFragment extends Fragment {
         bikeLayout.setBackgroundResource(R.drawable.textview_background);
         walkLayout.setBackgroundResource(R.drawable.black_background);
         ImageViewCompat.setImageTintList(car,
-                ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.black)));
+                ColorStateList.valueOf(ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.black)));
         ImageViewCompat.setImageTintList(bike,
                 ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.black)));
         ImageViewCompat.setImageTintList(walk,
@@ -228,7 +236,7 @@ public class SetRouteFragment extends Fragment {
         bikeLayout.setBackgroundResource(R.drawable.black_background);
         walkLayout.setBackgroundResource(R.drawable.textview_background);
         ImageViewCompat.setImageTintList(car,
-                ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.black)));
+                ColorStateList.valueOf(ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.black)));
         ImageViewCompat.setImageTintList(bike,
                 ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.white)));
         ImageViewCompat.setImageTintList(walk,
@@ -241,7 +249,7 @@ public class SetRouteFragment extends Fragment {
         bikeLayout.setBackgroundResource(R.drawable.textview_background);
         walkLayout.setBackgroundResource(R.drawable.textview_background);
         ImageViewCompat.setImageTintList(car,
-                ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.white)));
+                ColorStateList.valueOf(ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.white)));
         ImageViewCompat.setImageTintList(bike,
                 ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.black)));
         ImageViewCompat.setImageTintList(walk,
