@@ -14,4 +14,12 @@
     <string name="user_location_permission_not_granted">Location permission not granted</string>
     <string name="select_destination">Select destination</string>
     <string name="your_location">Your Location</string>
+    <string name="title_activity_music">Music</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
+    <string name="title_activity_local_music_player">LocalMusicPlayer</string>
+    <string name="title_activity_main">MainActivity</string>
 </resources>
