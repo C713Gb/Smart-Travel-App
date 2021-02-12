@@ -39,7 +39,8 @@ public class MusicFragment extends Fragment {
 
         localMusic.setOnClickListener(view1 -> startActivity(new Intent(homeActivity, LocalMusicActivity.class)));
 
-        spotify.setOnClickListener(view1 -> gotoUrl("https://www.spotify.com/"));
+        spotify.setOnClickListener(view1 -> gotoUrl("https://open.spotify.com/?_gl=1*1m4d9i8*_gcl_aw*R0NMLjE2MTI4MjQzODUuQ2owS0NRaUEzNE9CQmhDY0FSSXNBRzMydXZNNjRTWnI3TXM2RmtJcjFiWmJoYnVUSGpLZmpSTmZ4NWxSUDlubGNRVzc4blc0SGFSa1JsQWFBcXU1RUFMd193Y0I.*_gcl_dc*R0NMLjE2MTI4MjQzODUuQ2owS0NRaUEzNE9CQmhDY0FSSXNBRzMydXZNNjRTWnI3TXM2RmtJcjFiWmJoYnVUSGpLZmpSTmZ4NWxSUDlubGNRVzc4blc0SGFSa1JsQWFBcXU1RUFMd193Y0I.&_ga=2.73061395.1231710312.1612824341-354077174.1612692103&_gac=1.14169157.1612824417.Cj0KCQiA34OBBhCcARIsAG32uvM64SZr7Ms6FkIr1bZbhbuTHjKfjRNfx5lRP9nlcQW78nW4HaRkRlAaAqu5EALw_wcB")
+            );
 
         jiosavan.setOnClickListener(view12 -> gotoUrl("https://www.jiosaavn.com/"));
 
