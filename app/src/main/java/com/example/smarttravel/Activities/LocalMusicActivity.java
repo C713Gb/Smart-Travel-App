@@ -96,14 +96,14 @@ public class LocalMusicActivity extends AppCompatActivity {
 
             mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
             mediaPlayer.start();
-            Toast.makeText(LocalMusicActivity.this, "hi Viswesh Lalli", Toast.LENGTH_SHORT).show();
         });
     }
     void getMusic(){
         files = new ArrayList<>();
         ContentResolver contentResolver = getContentResolver();
         Uri songuri=MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-        Cursor songcursor = contentResolver.query(songuri,null,null,null,null);
+        Cursor songcursor = contentResolver
+                .query(songuri,null,null,null,null);
 
         if(songcursor!=null && songcursor.moveToFirst()){
             int songTitle = songcursor.getColumnIndex(MediaStore.Audio.Media.TITLE);
@@ -112,8 +112,10 @@ public class LocalMusicActivity extends AppCompatActivity {
             do{
                 String currentTitle = songcursor.getString(songTitle);
                 String currentArtist= songcursor.getString(songArtist);
-                arrayList.add(currentTitle + "\n" +currentArtist);
-                files.add((new File(songcursor.getString(songcursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA)))));
+                if (currentArtist.contains("unknown")) currentArtist = "Unknown Artist";
+                arrayList.add("\n" + currentTitle + "\n" +currentArtist + "\n");
+                files.add((new File(songcursor.getString(songcursor
+                        .getColumnIndexOrThrow(MediaStore.Audio.Media.DATA)))));
             } while (songcursor.moveToNext());
         }
 
@@ -127,7 +129,6 @@ public class LocalMusicActivity extends AppCompatActivity {
             case My_Permisson:{
                 if(grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
                     if(ContextCompat.checkSelfPermission(LocalMusicActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)==PackageManager.PERMISSION_GRANTED){
-                        Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
                         doStuff();
                     }
 
@@ -141,7 +142,6 @@ public class LocalMusicActivity extends AppCompatActivity {
             case My_Permissions:{
                 if(grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
                     if(ContextCompat.checkSelfPermission(LocalMusicActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)==PackageManager.PERMISSION_GRANTED){
-                        Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
                         doStuff();
                     }
 

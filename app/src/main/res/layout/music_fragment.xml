@@ -1,45 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/purple_700">
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="LISTEN TO THE BEST"
-        android:textColor="@color/white"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:textSize="30dp"/>
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#040810"
+    android:padding="20dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textView"
-        android:background="@color/white"
         android:clickable="true"
         android:layout_marginTop="5dp"
         android:id="@+id/localRelativeLayout">
 
         <ImageView
             android:id="@+id/local"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:src="@drawable/local"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_playlist"
+            app:tint="@color/white"
+            android:padding="10dp"
             android:layout_margin="5dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/local"
-            android:textSize="20dp"
-            android:text="Play Downloaded"
-            android:layout_marginRight="40dp"
-            android:textColor="#000"
-            android:textStyle="bold"
+            android:layout_toEndOf="@id/local"
+            android:text="Downloaded"
+            android:layout_marginStart="6dp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/opensans_regular"
             android:layout_centerInParent="true" />
     </RelativeLayout>
 
@@ -47,7 +37,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/localRelativeLayout"
-        android:background="@color/white"
         android:clickable="true"
         android:id="@+id/spotifyRelativeLayout"
         android:layout_marginTop="5dp">
@@ -55,18 +44,18 @@
         <ImageView
             android:layout_margin="5dp"
             android:id="@+id/spotify"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:src="@drawable/spotify" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_spotify"
+            android:padding="10dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/spotify"
-            android:textSize="20dp"
-            android:layout_marginRight="40dp"
-            android:text="Play Using Spotify"
-            android:textColor="#000"
-            android:textStyle="bold"
+            android:layout_toEndOf="@id/spotify"
+            android:text="Spotify"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/opensans_regular"
             android:layout_centerInParent="true" />
     </RelativeLayout>
 
@@ -74,26 +63,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/spotifyRelativeLayout"
-        android:background="@color/white"
         android:clickable="true"
         android:layout_marginTop="5dp"
         android:id="@+id/jioRelativeLayout">
 
         <ImageView
-            android:layout_margin="5dp"
+            android:layout_margin="10dp"
             android:id="@+id/jio"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:src="@drawable/jiosavan" />
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:src="@drawable/jiosaavn"
+            android:padding="4dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/jio"
-            android:textSize="20dp"
-            android:layout_marginRight="40dp"
-            android:text="Play Using Jio-Savan"
-            android:textColor="#000"
-            android:textStyle="bold"
+            android:layout_toEndOf="@id/jio"
+            android:layout_marginStart="10dp"
+            android:text="Jio-Savan"
+            android:textColor="@color/white"
+            android:fontFamily="@font/opensans_regular"
             android:layout_centerInParent="true" />
     </RelativeLayout>
 
@@ -101,7 +89,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/jioRelativeLayout"
-        android:background="@color/white"
         android:clickable="true"
         android:layout_marginTop="5dp"
         android:id="@+id/youtubeRelativeLaout">
@@ -109,18 +96,17 @@
         <ImageView
             android:layout_margin="5dp"
             android:id="@+id/youtube"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:src="@drawable/youtube" />
-        <TextView
-            android:layout_marginRight="40dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/youtube"
-            android:textSize="20dp"
-            android:text="Play Using YouTube"
-            android:textColor="#000"
-            android:textStyle="bold"
+            android:src="@drawable/ic_youtube"
+            android:padding="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/youtube"
+            android:text="YouTube Music"
+            android:textColor="@color/white"
+            android:fontFamily="@font/opensans_regular"
             android:layout_centerInParent="true" />
     </RelativeLayout>
 
@@ -128,27 +114,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/youtubeRelativeLaout"
-        android:background="@color/white"
         android:clickable="true"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:id="@+id/gaanaRelativeLaout">
 
         <ImageView
-            android:layout_margin="5dp"
+            android:layout_margin="10dp"
             android:id="@+id/gaana"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:padding="10dp"
             android:src="@drawable/gaana" />
         <TextView
-            android:layout_marginRight="40dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/gaana"
-            android:textSize="20dp"
-            android:text="Play Using Gaana"
-            android:textColor="#000"
-            android:textStyle="bold"
+            android:text="Gaana"
+            android:textColor="@color/white"
+            android:fontFamily="@font/opensans_regular"
             android:layout_centerInParent="true" />
     </RelativeLayout>
 

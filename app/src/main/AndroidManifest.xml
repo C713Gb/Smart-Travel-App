@@ -34,9 +34,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.AccountNameChange"
+        <activity android:name=".Activities.AccountNameChangeActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".Activities.AccountEmailChange"
+        <activity android:name=".Activities.AccountEmailChangeActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".Activities.LocalMusicPlayerActivity"
             android:screenOrientation="portrait"/>

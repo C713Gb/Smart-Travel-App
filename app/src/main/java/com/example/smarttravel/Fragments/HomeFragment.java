@@ -1,6 +1,7 @@
 package com.example.smarttravel.Fragments;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,6 +42,7 @@ public class HomeFragment extends Fragment {
     HomeActivity homeActivity;
     DatabaseReference reference;
     List<Route> pastRouteList, upcomingRouteList;
+    ProgressDialog progressDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,6 +53,9 @@ public class HomeFragment extends Fragment {
         homeActivity = (HomeActivity) getActivity();
         pastRouteList = new ArrayList<>();
         upcomingRouteList = new ArrayList<>();
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
         return root;
     }
 
@@ -83,6 +88,8 @@ public class HomeFragment extends Fragment {
     }
 
     public void updateRides() {
+        progressDialog.setMessage("Loading Rides");
+        progressDialog.show();
         upcomingRouteList.clear();
         pastRouteList.clear();
 
@@ -126,6 +133,7 @@ public class HomeFragment extends Fragment {
                             }
                         }
                     }
+                    progressDialog.dismiss();
 
                     RidesAdapter ridesAdapter = new RidesAdapter(getContext(), pastRouteList);
                     past.setAdapter(ridesAdapter);
@@ -136,10 +144,12 @@ public class HomeFragment extends Fragment {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
+                    progressDialog.dismiss();
                     Timber.d(error.getMessage());
                 }
             });
         } catch (Exception e){
+            progressDialog.dismiss();
             e.printStackTrace();
         }
 
