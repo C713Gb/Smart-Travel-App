@@ -12,8 +12,8 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.example.smarttravel.Activities.HomeActivity;
-import com.example.smarttravel.Activities.AccountEmailChange;
-import com.example.smarttravel.Activities.AccountNameChange;
+import com.example.smarttravel.Activities.AccountEmailChangeActivity;
+import com.example.smarttravel.Activities.AccountNameChangeActivity;
 import com.example.smarttravel.R;
 
 public class AccountFragment extends Fragment {
@@ -44,7 +44,7 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                startActivity(new Intent(homeActivity, AccountNameChange.class));
+                startActivity(new Intent(homeActivity, AccountNameChangeActivity.class));
             }
         });
 
@@ -52,7 +52,7 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                startActivity(new Intent(homeActivity, AccountEmailChange.class));
+                startActivity(new Intent(homeActivity, AccountEmailChangeActivity.class));
             }
         });
 

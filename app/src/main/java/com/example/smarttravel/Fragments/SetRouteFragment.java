@@ -1,5 +1,6 @@
 package com.example.smarttravel.Fragments;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.res.ColorStateList;
@@ -29,6 +30,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 import timber.log.Timber;
 
@@ -40,6 +42,7 @@ public class SetRouteFragment extends Fragment {
     LinearLayout carLayout, bikeLayout, walkLayout;
     String selectedMode = "";
     ProgressDialog progressDialog;
+    Route route;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,11 +66,34 @@ public class SetRouteFragment extends Fragment {
         return root;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         destination.setOnClickListener(view1 -> ma.searchLocation());
         new Handler().postDelayed(() -> ma.bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED), 1000);
+
+        if (ma.strUpdate.equals("true")){
+            route = ma.route;
+            String mode = route.getMode();
+            switch (mode) {
+                case "car":
+                    updateCar();
+                    break;
+                case "bike":
+                    updateBike();
+                    break;
+                case "walk":
+                    updateWalk();
+                    break;
+            }
+
+            destination.setText(route.getDestination());
+            date.setText(route.getDate());
+            next.setText("Update");
+            new Handler().postDelayed(() -> ma.showDirection2(route.getDestinationLatLng()), 2000);
+
+        }
 
         car.setOnClickListener(view1 -> updateCar());
 
@@ -90,7 +116,11 @@ public class SetRouteFragment extends Fragment {
                     (!destination.getText().toString().equals("Select destination"))){
                 if (selectedMode.length() > 0){
                     if (!date.getText().toString().equals("Set Travel Date")){
-                        updateDatabase();
+                        if (ma.strUpdate.equals("true")){
+                            updateRoute();
+                        } else {
+                            updateDatabase();
+                        }
                     } else {
                         Toast.makeText(ma, "Please select date", Toast.LENGTH_SHORT).show();
                     }
@@ -102,6 +132,47 @@ public class SetRouteFragment extends Fragment {
             }
         });
 
+
+    }
+
+    private void updateRoute() {
+        progressDialog.setMessage("Updating...");
+        progressDialog.show();
+
+        try {
+
+            Destination destinationObject = new Destination(Double.toString(ma.destination.latitude()),
+                    Double.toString(ma.destination.longitude()));
+
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("rides");
+            String id = route.getRouteId();
+
+            Route route = new Route(
+                    destination.getText().toString(),
+                    SharedPreference.getUserId(getContext()),
+                    selectedMode,
+                    date.getText().toString(),
+                    destinationObject,
+                    id
+            );
+
+            assert id != null;
+            reference.child(id).setValue(route).addOnCompleteListener(task -> {
+                if (task.isSuccessful()){
+                    progressDialog.dismiss();
+                    Toast.makeText(ma, "Ride successfully updated!", Toast.LENGTH_SHORT).show();
+                    ma.goToHome();
+                } else {
+                    progressDialog.dismiss();
+                    Timber.d("updateRoute: %s", Objects.requireNonNull(task.getException()).getMessage());
+                    task.getException().printStackTrace();
+                }
+            });
+
+        } catch (Exception e){
+            Toast.makeText(ma, "Update Failed", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
 
     }
 
@@ -134,7 +205,7 @@ public class SetRouteFragment extends Fragment {
                     ma.goToHome();
                 } else {
                     progressDialog.dismiss();
-                    Timber.d("updateDatabase: %s", task.getException().getMessage());
+                    Timber.d("updateDatabase: %s", Objects.requireNonNull(task.getException()).getMessage());
                     task.getException().printStackTrace();
                 }
             });

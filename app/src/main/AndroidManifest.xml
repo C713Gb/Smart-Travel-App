@@ -4,9 +4,6 @@
     package="com.example.smarttravel">
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-
-    <uses-feature android:name="android.hardware.type.watch" />
-
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -21,22 +18,28 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartTravel"
         android:requestLegacyExternalStorage="true">
-
-        <activity android:name=".Activities.AccountNameChange"/>
-        <activity android:name=".Activities.AccountEmailChange"/>
-        <activity android:name=".Activities.LocalMusicPlayerActivity" />
-        <activity android:name=".Activities.LocalMusicActivity" />
-        <activity android:name=".Activities.MapActivity" />
-        <activity android:name=".Activities.UserDetailsActivity" />
-        <activity android:name=".Activities.WelcomeActivity" />
-        <activity android:name=".Activities.HomeActivity" />
-        <activity android:name=".Activities.SplashScreenActivity">
+        <activity android:name=".Activities.MapActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.UserDetailsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.WelcomeActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.HomeActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.SplashScreenActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Activities.AccountNameChangeActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.AccountEmailChangeActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.LocalMusicActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

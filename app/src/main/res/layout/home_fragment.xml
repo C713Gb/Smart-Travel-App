@@ -64,8 +64,7 @@
                 android:id="@+id/upcoming_routes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+                android:layout_marginTop="10dp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -81,8 +80,7 @@
                 android:id="@+id/past_routes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+                android:layout_marginTop="10dp"/>
 
 
         </LinearLayout>
