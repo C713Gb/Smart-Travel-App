@@ -11,6 +11,19 @@ public class SharedPreference {
     private static final String USER_NAME = "userName";
     private static final String USER_EMAIL = "userEmail";
     private static final String USER_ID = "userId";
+    private static final String USER_PIC = "userPic";
+
+    public static String getUserPic(Context context) {
+        SharedPreferences SPUserDetails= context.getSharedPreferences(USER_DETAILS,MODE_PRIVATE);
+        return SPUserDetails.getString(USER_PIC,"");
+    }
+
+    public static void setUserPic(Context context,String value) {
+        SharedPreferences SPUserDetails = context.getSharedPreferences(USER_DETAILS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = SPUserDetails.edit();
+        editor.putString(USER_PIC , value);
+        editor.apply();
+    }
 
     public static String getUserId(Context context) {
         SharedPreferences SPUserDetails= context.getSharedPreferences(USER_DETAILS,MODE_PRIVATE);

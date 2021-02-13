@@ -128,6 +128,7 @@ public class UserDetailsActivity extends AppCompatActivity {
                             map.put("userId", userId);
                             map.put("username", str_username);
                             map.put("userEmail", str_email);
+                            map.put("userPic", "default");
 
                             reference.child(userId).setValue(map).addOnCompleteListener(task1 -> {
                                 if (task1.isSuccessful()){
