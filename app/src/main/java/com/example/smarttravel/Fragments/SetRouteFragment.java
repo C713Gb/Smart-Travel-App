@@ -149,7 +149,7 @@ public class SetRouteFragment extends Fragment {
 
             Route route = new Route(
                     destination.getText().toString(),
-                    SharedPreference.getUserId(Objects.requireNonNull(getContext())),
+                    SharedPreference.getUserId(getContext()),
                     selectedMode,
                     date.getText().toString(),
                     destinationObject,
@@ -190,7 +190,7 @@ public class SetRouteFragment extends Fragment {
 
             Route route = new Route(
                     destination.getText().toString(),
-                    SharedPreference.getUserId(Objects.requireNonNull(getContext())),
+                    SharedPreference.getUserId(getContext()),
                     selectedMode,
                     date.getText().toString(),
                     destinationObject,
@@ -223,7 +223,7 @@ public class SetRouteFragment extends Fragment {
         bikeLayout.setBackgroundResource(R.drawable.textview_background);
         walkLayout.setBackgroundResource(R.drawable.black_background);
         ImageViewCompat.setImageTintList(car,
-                ColorStateList.valueOf(ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.black)));
+                ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.black)));
         ImageViewCompat.setImageTintList(bike,
                 ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.black)));
         ImageViewCompat.setImageTintList(walk,
@@ -236,7 +236,7 @@ public class SetRouteFragment extends Fragment {
         bikeLayout.setBackgroundResource(R.drawable.black_background);
         walkLayout.setBackgroundResource(R.drawable.textview_background);
         ImageViewCompat.setImageTintList(car,
-                ColorStateList.valueOf(ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.black)));
+                ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.black)));
         ImageViewCompat.setImageTintList(bike,
                 ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.white)));
         ImageViewCompat.setImageTintList(walk,
@@ -249,7 +249,7 @@ public class SetRouteFragment extends Fragment {
         bikeLayout.setBackgroundResource(R.drawable.textview_background);
         walkLayout.setBackgroundResource(R.drawable.textview_background);
         ImageViewCompat.setImageTintList(car,
-                ColorStateList.valueOf(ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.white)));
+                ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.white)));
         ImageViewCompat.setImageTintList(bike,
                 ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.black)));
         ImageViewCompat.setImageTintList(walk,

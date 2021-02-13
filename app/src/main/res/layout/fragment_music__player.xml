@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/blackish"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragments.MusicPlayerFragment">
+
+    <SeekBar
+        android:id="@+id/progress_seek_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:thumb="@null"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/progress_seek_bar">
+
+        <TextView
+            android:id="@+id/play_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@id/play"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:layout_centerVertical="true"
+            android:fontFamily="@font/opensans_regular"
+            android:maxLines="1"/>
+
+        <ImageView
+            android:id="@+id/play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_play"
+            android:layout_toStartOf="@id/pause"
+            app:tint="@color/white"
+            android:clickable="true"
+            android:padding="5dp"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/pause"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_pause"
+            android:layout_toStartOf="@id/play_next"
+            app:tint="@color/white"
+            android:padding="5dp"
+            android:clickable="true"/>
+
+        <ImageView
+            android:id="@+id/play_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_play_next"
+            app:tint="@color/white"
+            android:layout_alignParentEnd="true"
+            android:clickable="true"
+            android:padding="5dp"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>
