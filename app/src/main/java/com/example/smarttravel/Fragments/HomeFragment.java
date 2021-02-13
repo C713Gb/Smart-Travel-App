@@ -38,21 +38,15 @@ import timber.log.Timber;
 public class HomeFragment extends Fragment {
 
     TextView create;
-    RecyclerView upcoming, past;
     HomeActivity homeActivity;
     DatabaseReference reference;
-    List<Route> pastRouteList, upcomingRouteList;
     ProgressDialog progressDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.home_fragment,container,false);
         create = root.findViewById(R.id.create_btn);
-        upcoming = root.findViewById(R.id.upcoming_routes);
-        past = root.findViewById(R.id.past_routes);
         homeActivity = (HomeActivity) getActivity();
-        pastRouteList = new ArrayList<>();
-        upcomingRouteList = new ArrayList<>();
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setCancelable(false);
         progressDialog.setCanceledOnTouchOutside(false);
@@ -60,98 +54,10 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-
-        updateRides();
-    }
-
-    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         create.setOnClickListener(view1 -> homeActivity.goToMaps());
 
-        past.setHasFixedSize(true);
-        upcoming.setHasFixedSize(true);
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        linearLayoutManager.setReverseLayout(true);
-        linearLayoutManager.setStackFromEnd(true);
-
-        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getContext());
-        linearLayoutManager2.setReverseLayout(true);
-        linearLayoutManager2.setStackFromEnd(true);
-
-        past.setLayoutManager(linearLayoutManager);
-        upcoming.setLayoutManager(linearLayoutManager2);
-
 
     }
 
-    public void updateRides() {
-        progressDialog.setMessage("Loading Rides");
-        progressDialog.show();
-        upcomingRouteList.clear();
-        pastRouteList.clear();
-
-        try {
-            reference = FirebaseDatabase.getInstance().getReference("rides");
-            reference.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        Route route = snapshot.getValue(Route.class);
-                        String userId = SharedPreference.getUserId(getContext());
-                        if (userId.equals(route.getUserId())) {
-
-                            Date c = Calendar.getInstance().getTime();
-                            SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-                            String currentDate = df.format(c);
-
-                            @SuppressLint("SimpleDateFormat")
-                            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-                            Date strDate = null;
-                            try {
-                                strDate = sdf.parse(currentDate);
-                            } catch (ParseException e) {
-                                e.printStackTrace();
-                            }
-
-                            String check = route.getDate();
-                            Date date = null;
-                            try {
-                                date = sdf.parse(check);
-                            } catch (ParseException e) {
-                                e.printStackTrace();
-                            }
-
-                            if (date.after(strDate)) {
-                                upcomingRouteList.add(route);
-                            }else if (date.before(strDate)) {
-                                pastRouteList.add(route);
-                            }else{
-                                upcomingRouteList.add(route);
-                            }
-                        }
-                    }
-                    progressDialog.dismiss();
-
-                    RidesAdapter ridesAdapter = new RidesAdapter(getContext(), pastRouteList);
-                    past.setAdapter(ridesAdapter);
-
-                    RidesAdapter ridesAdapter2 = new RidesAdapter(getContext(), upcomingRouteList);
-                    upcoming.setAdapter(ridesAdapter2);
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    progressDialog.dismiss();
-                    Timber.d(error.getMessage());
-                }
-            });
-        } catch (Exception e){
-            progressDialog.dismiss();
-            e.printStackTrace();
-        }
-
-    }
 }

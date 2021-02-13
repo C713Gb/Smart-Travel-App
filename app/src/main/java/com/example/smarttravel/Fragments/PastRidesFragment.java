@@ -36,24 +36,24 @@ import java.util.Locale;
 
 import timber.log.Timber;
 
-public class UpcomingRidesFragment extends Fragment {
+public class PastRidesFragment extends Fragment {
 
+    RecyclerView recyclerView;
     ImageView back;
     HomeActivity homeActivity;
-    RecyclerView recyclerView;
     ProgressDialog progressDialog;
-    List<Route> upcomingRouteList;
+    List<Route> pastRouteList;
     DatabaseReference reference;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View root = inflater.inflate(R.layout.fragment_upcoming_rides, container, false);
+        View root = inflater.inflate(R.layout.fragment_past_rides, container, false);
+        recyclerView = root.findViewById(R.id.past_routes);
         back = root.findViewById(R.id.back_btn);
         homeActivity = (HomeActivity) getActivity();
-        recyclerView = root.findViewById(R.id.upcoming_routes);
-        upcomingRouteList = new ArrayList<>();
+        pastRouteList = new ArrayList<>();
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setCancelable(false);
         progressDialog.setCanceledOnTouchOutside(false);
@@ -68,14 +68,13 @@ public class UpcomingRidesFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         back.setOnClickListener(view1 -> homeActivity.onBackPressed());
-
         updateRides();
     }
 
     public void updateRides() {
         progressDialog.setMessage("Loading Rides");
         progressDialog.show();
-        upcomingRouteList.clear();
+        pastRouteList.clear();
 
         try {
             reference = FirebaseDatabase.getInstance().getReference("rides");
@@ -108,17 +107,13 @@ public class UpcomingRidesFragment extends Fragment {
                                 e.printStackTrace();
                             }
 
-                            if (date.after(strDate)) {
-                                upcomingRouteList.add(route);
-                            }else if (date.before(strDate)) {
-                                // Nothing
-                            }else{
-                                upcomingRouteList.add(route);
+                            if (date.before(strDate)) {
+                                pastRouteList.add(route);
                             }
                         }
                     }
                     progressDialog.dismiss();
-                    RidesAdapter ridesAdapter = new RidesAdapter(getContext(), upcomingRouteList);
+                    RidesAdapter ridesAdapter = new RidesAdapter(getContext(), pastRouteList);
                     recyclerView.setAdapter(ridesAdapter);
                 }
 

@@ -63,11 +63,13 @@
             android:fontFamily="@font/opensans_regular"/>
 
         <ImageView
+            android:id="@+id/next_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_arrow"
             android:layout_gravity="center_vertical"
             app:tint="@color/white"
+            android:clickable="true"
             android:padding="4dp"/>
 
 
@@ -100,11 +102,13 @@
             android:fontFamily="@font/opensans_regular"/>
 
         <ImageView
+            android:id="@+id/next_upcoming"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_arrow"
             android:layout_gravity="center_vertical"
             app:tint="@color/white"
+            android:clickable="true"
             android:padding="4dp"/>
 
 
@@ -137,11 +141,13 @@
             android:fontFamily="@font/opensans_regular"/>
 
         <ImageView
+            android:id="@+id/next_past"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_arrow"
             android:layout_gravity="center_vertical"
             app:tint="@color/white"
+            android:clickable="true"
             android:padding="4dp"/>
 
 

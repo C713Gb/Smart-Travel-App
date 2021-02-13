@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Fragments.UpcomingRidesFragment"
+    tools:context=".Fragments.PastRidesFragment"
     android:background="@color/blackish"
     android:clickable="true">
 
@@ -22,16 +22,17 @@
         android:gravity="center"
         android:textSize="18sp"
         android:layout_toEndOf="@id/back_btn"
-        android:text="Upcoming Rides"
+        android:text="Past Rides"
         android:layout_marginTop="20dp"
         android:textColor="@color/white"
         android:fontFamily="@font/opensans_regular"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/upcoming_routes"
+        android:id="@+id/past_routes"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/back_btn"/>
+
 
 
 </RelativeLayout>

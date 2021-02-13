@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -29,6 +30,7 @@ public class AccountFragment extends Fragment {
     TextView username, email, editProfile, upcomingRides, pastRides;
     private static final int MY_CAMERA_REQUEST_CODE = 100;
     CircleImageView profileImage;
+    ImageView next1, next2, next3;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,6 +43,9 @@ public class AccountFragment extends Fragment {
         upcomingRides = root.findViewById(R.id.rides_btn);
         pastRides = root.findViewById(R.id.rides_btn2);
         profileImage = root.findViewById(R.id.circle_image);
+        next1 = root.findViewById(R.id.next_edit);
+        next2 = root.findViewById(R.id.next_upcoming);
+        next3 = root.findViewById(R.id.next_past);
         return root;
     }
 
@@ -56,16 +61,28 @@ public class AccountFragment extends Fragment {
                     .into(profileImage);
         }
 
+        next1.setOnClickListener(view1 -> {
+            homeActivity.addFragment(new EditProfileFragment(), true, "nobottomnav");
+        });
+
+        next2.setOnClickListener(view1 -> {
+            homeActivity.addFragment(new UpcomingRidesFragment(), true, "nobottomnav");
+        });
+
+        next3.setOnClickListener(view1 -> {
+            homeActivity.addFragment(new PastRidesFragment(), true, "nobottomnav");
+        });
+
         editProfile.setOnClickListener(view1 -> {
             homeActivity.addFragment(new EditProfileFragment(), true, "nobottomnav");
         });
 
         upcomingRides.setOnClickListener(view1 -> {
-
+            homeActivity.addFragment(new UpcomingRidesFragment(), true, "nobottomnav");
         });
 
         pastRides.setOnClickListener(view1 -> {
-
+            homeActivity.addFragment(new PastRidesFragment(), true, "nobottomnav");
         });
 
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
