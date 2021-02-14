@@ -6,12 +6,61 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/blackish">
 
+    <TextView
+        android:id="@+id/greetings_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/opensans_semibold"
+        android:textSize="18sp"
+        android:padding="20dp"
+        android:text="Hello"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/white"/>
+
+    <RelativeLayout
+        android:id="@+id/r_layout_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:padding="10dp"
+        android:layout_below="@id/greetings_txt"
+        android:background="@drawable/card_background"
+        android:elevation="10dp"
+        android:clickable="true">
+
+        <TextView
+            android:id="@+id/song_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Listen your \nfavourite songs"
+            android:clickable="true"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
+            android:textColor="@color/purple_500"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:fontFamily="@font/opensans_semibold"/>
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_music"
+            android:layout_margin="10dp"/>
+
+    </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/r_layout_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
         android:padding="10dp"
+        android:layout_below="@id/r_layout_2"
         android:background="@drawable/card_background"
         android:elevation="10dp">
 
@@ -34,6 +83,66 @@
             android:layout_height="50dp"
             android:layout_alignParentEnd="true"
             android:src="@drawable/ic_destination"
+            android:layout_margin="10dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/r_layout_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:padding="10dp"
+        android:layout_below="@id/r_layout_1"
+        android:background="@drawable/card_background"
+        android:elevation="10dp"
+        android:clickable="true">
+
+        <TextView
+            android:id="@+id/rides_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="See your \nUpcoming rides"
+            android:clickable="true"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
+            android:textColor="@color/purple_500"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:fontFamily="@font/opensans_semibold"/>
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_scooter"
+            android:layout_margin="10dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="20dp">
+
+        <ImageView
+            android:id="@+id/sponsored_img"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/ic_car_ad"
+            android:clickable="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="Sponsored"
+            android:fontFamily="@font/opensans_regular"
+            android:textColor="@color/black"
+            android:padding="10dp"
             android:layout_margin="10dp"/>
 
     </RelativeLayout>

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/blackish"
     tools:context=".Activities.UserDetailsActivity">
 
     <ImageView
@@ -11,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_back"
-        app:tint="@color/purple_500"
+        app:tint="@color/white"
         android:padding="5dp"
         android:clickable="true"
         android:layout_margin="20dp"/>
@@ -30,7 +31,13 @@
             android:fontFamily="@font/opensans_regular"
             android:inputType="text"
             android:layout_margin="20dp"
-            android:maxLength="10"/>
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:maxLength="10"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:textColor="@color/blackish"
+            android:background="@drawable/edit_text_background"/>
 
         <EditText
             android:id="@+id/email_txt"
@@ -38,23 +45,35 @@
             android:layout_height="wrap_content"
             android:hint="Email ID"
             android:fontFamily="@font/opensans_regular"
+            android:background="@drawable/edit_text_background"
             android:inputType="textEmailAddress"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:textColor="@color/blackish"
             android:maxLines="1"/>
 
         <EditText
             android:id="@+id/password_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Password (at least 6 digits)"
+            android:hint="Password (at least 6 characters)"
             android:fontFamily="@font/opensans_regular"
             android:inputType="textPassword"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
-            android:maxLines="1"/>
+            android:maxLines="1"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:textColor="@color/blackish"
+            android:background="@drawable/edit_text_background"/>
 
     </LinearLayout>
 
@@ -63,13 +82,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:padding="20dp"
+        android:padding="10dp"
         android:text="Submit"
-        android:textSize="18sp"
         android:fontFamily="@font/opensans_regular"
-        android:textColor="@color/white"
+        android:textColor="@color/blackish"
         android:gravity="center"
-        android:background="@color/purple_500"
+        android:background="@drawable/edit_text_background"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="40dp"
         android:clickable="true"/>
 
 </RelativeLayout>
