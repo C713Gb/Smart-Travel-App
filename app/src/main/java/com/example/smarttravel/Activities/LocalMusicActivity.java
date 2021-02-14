@@ -57,6 +57,7 @@ public class LocalMusicActivity extends AppCompatActivity {
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
 
         back = findViewById(R.id.back_btn);
+        songListView = (ListView) findViewById(R.id.songlistView);
         back.setOnClickListener(view -> onBackPressed());
 
         initializeMediaplayer();
@@ -104,7 +105,6 @@ public class LocalMusicActivity extends AppCompatActivity {
     }
 
     public void doStuff(){
-        songListView = (ListView) findViewById(R.id.songlistView);
         arrayList = new ArrayList<>();
 
         getMusic(); // initialize Uri here
