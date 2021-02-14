@@ -49,7 +49,7 @@ public class HomeActivity extends AppCompatActivity {
     FirebaseAuth auth;
     public String currentFrame = "";
     public Uri imageUri;
-    public String myUrl="";
+    public String myUrl="", change = "";
     View divider;
 
     @Override
@@ -179,6 +179,7 @@ public class HomeActivity extends AppCompatActivity {
             imageUri = result.getUri();
 
             myUrl = getPathFromURI(HomeActivity.this, imageUri);
+            change = "yes";
             addFragment(new EditProfileFragment(), true, "nobottomnav");
 
         } else {

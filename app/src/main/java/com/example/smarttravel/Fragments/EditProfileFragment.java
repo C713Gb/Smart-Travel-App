@@ -81,7 +81,10 @@ public class EditProfileFragment extends Fragment {
 
         save.setOnClickListener(view1 -> {
             if (username.getText().toString().trim().length() > 0){
-                updateUser(username.getText().toString().trim());
+                if (homeActivity.change.equals("yes"))
+                    updateUser(username.getText().toString().trim());
+                else
+                    updateUser2(username.getText().toString().trim());
             }
             else Toast.makeText(homeActivity, "Username cannot be empty", Toast.LENGTH_SHORT).show();
         });
@@ -155,6 +158,45 @@ public class EditProfileFragment extends Fragment {
                 });
 
             }
+
+
+        } catch (Exception e){
+            progressDialog.dismiss();
+            Toast.makeText(homeActivity, "Failed : "+e.getMessage(), Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+
+    }
+
+    private void updateUser2(String s) {
+        progressDialog.setMessage("Saving...");
+        progressDialog.show();
+
+        try {
+
+            User user = new User(
+                    SharedPreference.getUserId(getContext()),
+                    s,
+                    SharedPreference.getUserEmail(getContext()),
+                    SharedPreference.getUserPic(getContext())
+            );
+
+
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+
+            reference.child(SharedPreference.getUserId(getContext())).setValue(user)
+                    .addOnCompleteListener(task1 -> {
+                        if (task1.isSuccessful()){
+                            homeActivity.change = "";
+                            progressDialog.dismiss();
+                            Toast.makeText(homeActivity, "Saved successfully!", Toast.LENGTH_SHORT).show();
+                            homeActivity.updateSharedPreference();
+                            homeActivity.onBackPressed();
+                        } else {
+                            progressDialog.dismiss();
+                            Toast.makeText(homeActivity, "Failed!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
 
 
         } catch (Exception e){
