@@ -37,7 +37,7 @@ public class EditProfileFragment extends Fragment {
     EditText username;
     ImageView back;
     HomeActivity homeActivity;
-    TextView save, editPic;
+    TextView save, editPic, email;
     ProgressDialog progressDialog;
     CircleImageView profilePic;
     StorageTask uploadTask;
@@ -54,6 +54,7 @@ public class EditProfileFragment extends Fragment {
         homeActivity = (HomeActivity) getActivity();
         save = root.findViewById(R.id.save_btn);
         editPic = root.findViewById(R.id.edit_pic);
+        email = root.findViewById(R.id.email_txt);
         profilePic = root.findViewById(R.id.profile_image);
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setCanceledOnTouchOutside(false);
@@ -72,6 +73,7 @@ public class EditProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         username.setText(SharedPreference.getUserName(getContext()));
+        email.setText(SharedPreference.getUserEmail(getContext()));
 
         back.setOnClickListener(view1 -> homeActivity.onBackPressed());
 

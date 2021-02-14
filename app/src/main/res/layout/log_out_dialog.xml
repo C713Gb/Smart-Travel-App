@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/textview_background"
+    android:layout_gravity="center"
+    android:elevation="6dp">
+
+    <TextView
+        android:id="@+id/log_out_txt"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/opensans_regular"
+        android:textColor="@color/blackish"
+        android:gravity="center"
+        android:text="Are you sure you want to log out ?"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp"
+        android:layout_marginTop="10dp"/>
+
+    <LinearLayout
+        android:layout_below="@id/log_out_txt"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:id="@+id/yes_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/opensans_regular"
+            android:textColor="@color/purple_500"
+            android:text="Yes"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_centerHorizontal="true"
+            android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/no_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/opensans_regular"
+            android:textColor="@color/purple_500"
+            android:text="No"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_centerHorizontal="true"
+            android:padding="10dp"/>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

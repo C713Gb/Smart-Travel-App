@@ -161,5 +161,44 @@
         android:background="@color/grey"
         android:layout_marginTop="10dp"/>
 
+    <LinearLayout
+        android:id="@+id/rides_layout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/divider4"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/log_out_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Log out"
+            android:textColor="@color/white"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:fontFamily="@font/opensans_regular"/>
+
+        <ImageView
+            android:id="@+id/next_log_out"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow"
+            android:layout_gravity="center_vertical"
+            app:tint="@color/white"
+            android:clickable="true"
+            android:padding="4dp"/>
+
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider5"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/rides_layout3"
+        android:background="@color/grey"
+        android:layout_marginTop="10dp"/>
+
 
 </RelativeLayout>
