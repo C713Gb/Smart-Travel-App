@@ -4,65 +4,65 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/blackish"
     tools:context=".Activities.WelcomeActivity">
 
     <TextView
         android:id="@+id/heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign Up"
+        android:text="Smart Travel"
         android:textSize="40sp"
         android:fontFamily="@font/opensans_regular"
         android:padding="10dp"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
-        android:textColor="@color/purple_500"/>
+        android:textColor="@color/white"/>
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/email_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="50dp"
-        android:layout_below="@id/heading">
+        android:text="Sign up with Email"
+        android:padding="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/opensans_regular"
+        android:textColor="@color/blackish"
+        android:gravity="center"
+        android:background="@drawable/edit_text_background"
+        android:layout_above="@id/google_btn"/>
 
-        <Button
-            android:id="@+id/email_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sign up with Email"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:layout_gravity="center"
-            android:fontFamily="@font/opensans_regular"
-            android:textAllCaps="false"
-            android:layout_margin="10dp"/>
-
-        <Button
-            android:id="@+id/google_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sign up with Google"
-            android:paddingStart="15dp"
-            android:paddingEnd="15dp"
-            android:layout_gravity="center"
-            android:fontFamily="@font/opensans_regular"
-            android:textAllCaps="false"
-            android:layout_marginBottom="10dp"/>
-
-    </LinearLayout>
+    <TextView
+        android:id="@+id/google_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sign in with Google"
+        android:padding="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/opensans_regular"
+        android:textColor="@color/blackish"
+        android:gravity="center"
+        android:background="@drawable/edit_text_background"
+        android:layout_above="@id/signin_btn"/>
 
     <TextView
         android:id="@+id/signin_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:padding="20dp"
-        android:text="Sign In"
-        android:textSize="18sp"
+        android:padding="10dp"
+        android:text="Sign In with Email"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="40dp"
         android:fontFamily="@font/opensans_regular"
-        android:textColor="@color/white"
+        android:textColor="@color/blackish"
         android:gravity="center"
-        android:background="@color/purple_500"
+        android:background="@drawable/edit_text_background"
         android:clickable="true"/>
 
 </RelativeLayout>

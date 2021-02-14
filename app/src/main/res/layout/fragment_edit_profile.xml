@@ -77,7 +77,33 @@
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             android:textColor="@color/blackish"
+            android:textSize="16sp"
             android:hint="John"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Email id"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="30dp"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/opensans_regular"/>
+
+        <TextView
+            android:id="@+id/email_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_text_background"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:textColor="@color/blackish"
             android:layout_marginTop="10dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"/>
