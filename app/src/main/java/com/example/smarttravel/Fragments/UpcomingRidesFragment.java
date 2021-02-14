@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.smarttravel.Activities.HomeActivity;
 import com.example.smarttravel.Adapters.RidesAdapter;
@@ -44,6 +45,7 @@ public class UpcomingRidesFragment extends Fragment {
     ProgressDialog progressDialog;
     List<Route> upcomingRouteList;
     DatabaseReference reference;
+    TextView noData;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,6 +56,7 @@ public class UpcomingRidesFragment extends Fragment {
         homeActivity = (HomeActivity) getActivity();
         recyclerView = root.findViewById(R.id.upcoming_routes);
         upcomingRouteList = new ArrayList<>();
+        noData = root.findViewById(R.id.no_data_txt);
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setCancelable(false);
         progressDialog.setCanceledOnTouchOutside(false);
@@ -118,6 +121,15 @@ public class UpcomingRidesFragment extends Fragment {
                         }
                     }
                     progressDialog.dismiss();
+
+                    if (upcomingRouteList.size() == 0){
+                        recyclerView.setVisibility(View.GONE);
+                        noData.setVisibility(View.VISIBLE);
+                    } else {
+                        recyclerView.setVisibility(View.VISIBLE);
+                        noData.setVisibility(View.GONE);
+                    }
+
                     RidesAdapter ridesAdapter = new RidesAdapter(getContext(), upcomingRouteList);
                     recyclerView.setAdapter(ridesAdapter);
                 }

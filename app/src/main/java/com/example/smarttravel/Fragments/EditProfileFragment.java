@@ -124,9 +124,6 @@ public class EditProfileFragment extends Fragment {
                         Gson gson = new Gson();
                         String taskResult = gson.toJson(task.getResult());
 
-                        Log.d(TAG, "updateUser1: "+taskResult);
-                        Log.d(TAG, "updateUser2: "+myUrl);
-
                         User user = new User(
                                 SharedPreference.getUserId(getContext()),
                                 s,
