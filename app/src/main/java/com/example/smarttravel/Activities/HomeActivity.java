@@ -50,6 +50,7 @@ public class HomeActivity extends AppCompatActivity {
     public String currentFrame = "";
     public Uri imageUri;
     public String myUrl="";
+    View divider;
 
     @Override
     protected void onStart() {
@@ -71,6 +72,7 @@ public class HomeActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         bottomFrag = findViewById(R.id.bottom_fragment_menu);
         bottomFrag.setOnNavigationItemSelectedListener(bfragListner);
+        divider = findViewById(R.id.divider);
         getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new HomeFragment()).commit();
 
         if (auth.getCurrentUser() != null) updateSharedPreference();
@@ -145,6 +147,7 @@ public class HomeActivity extends AppCompatActivity {
     public void addFragment(Fragment fragment, boolean addToBackStack, String tag) {
         currentFrame = tag;
         bottomFrag.setVisibility(View.GONE);
+        divider.setVisibility(View.GONE);
 
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction ft = manager.beginTransaction();
@@ -159,6 +162,7 @@ public class HomeActivity extends AppCompatActivity {
 
         if (currentFrame.equals("nobottomnav")){
             bottomFrag.setVisibility(View.VISIBLE);
+            divider.setVisibility(View.VISIBLE);
             currentFrame = "";
         }
 
