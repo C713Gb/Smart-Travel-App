@@ -5,13 +5,13 @@ plugins {
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
     buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.example.smarttravel"
         minSdkVersion 23
-        targetSdkVersion 30
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0"
 
@@ -49,11 +49,14 @@ dependencies {
 
 
     implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-places-v9:0.12.0'
-    implementation 'com.mapbox.mapboxsdk:mapbox-android-telemetry:5.0.1'
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-telemetry:6.1.0'
     implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-annotation-v9:0.9.0'
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
-    implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:9.2.0'
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:9.1.0'
     implementation 'com.mapbox.mapboxsdk:mapbox-sdk-services:5.5.0'
+
+    implementation 'com.squareup.okhttp3:okhttp:4.9.0'
+
     //noinspection GradleCompatible
     implementation 'com.android.support:design:26.1.0'
     implementation 'com.google.android.libraries.places:places:2.4.0'

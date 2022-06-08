@@ -22,10 +22,10 @@
     <ImageView
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_below="@id/heading"
         android:layout_above="@id/email_btn"
+        android:layout_below="@id/heading"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/ic_route"/>
+        android:src="@drawable/ic_route" />
 
     <TextView
         android:id="@+id/email_btn"
@@ -46,16 +46,17 @@
         android:id="@+id/google_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sign in with Google"
-        android:padding="10dp"
+        android:layout_above="@id/signin_btn"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
-        android:fontFamily="@font/opensans_regular"
-        android:textColor="@color/blackish"
-        android:gravity="center"
         android:background="@drawable/edit_text_background"
-        android:layout_above="@id/signin_btn"/>
+        android:fontFamily="@font/opensans_regular"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="Sign in with Google"
+        android:textColor="@color/blackish"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/signin_btn"

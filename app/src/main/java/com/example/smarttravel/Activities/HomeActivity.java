@@ -1,9 +1,11 @@
 package com.example.smarttravel.Activities;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
@@ -124,8 +126,39 @@ public class HomeActivity extends AppCompatActivity {
                 return true;
             };
 
+    private final static int REQUEST_CODE_ASK_PERMISSIONS = 1002;
+
     public void goToMaps() {
-        startActivity(new Intent(HomeActivity.this, MapActivity.class));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+
+            int res = checkSelfPermission(android.Manifest.permission.READ_PHONE_STATE);
+            if (res != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{android.Manifest.permission.READ_PHONE_STATE}, REQUEST_CODE_ASK_PERMISSIONS);
+            } else {
+                startActivity(new Intent(HomeActivity.this, MapActivity.class));
+            }
+
+        } else {
+            startActivity(new Intent(HomeActivity.this, MapActivity.class));
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CODE_ASK_PERMISSIONS:
+                if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(getApplicationContext(), "Allow Phone State Permission !", Toast.LENGTH_SHORT)
+                            .show();
+                } else {
+                    startActivity(new Intent(HomeActivity.this, MapActivity.class));
+                }
+
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
     }
 
     public void updateMap(Route route){
